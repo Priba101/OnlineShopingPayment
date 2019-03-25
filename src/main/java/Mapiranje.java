@@ -1,0 +1,101 @@
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+public class Mapiranje {
+	
+	@Entity
+	@Table(name="kartica")
+	public class Kartica{
+		@Id
+		@GeneratedValue 
+		@Column(name="id_kartice#") private long id;
+		@Column(name="Tip") private String tip;
+		@Column(name="Broj") private int broj;
+		@Column(name="Security_code") private short security_code;
+		@Column(name="Datum_isteka") private String datum_isteka;
+		@Column(name="Nosilac_kartice") private String nosilac_kartice;
+		@Column(name="Korisnik_kartice_id") private String korisnik_kartice_id;
+		@Column(name="Stanje") private int stanje;
+		
+		public Kartica(long id,String tip,int broj,short security_code,String datum_isteka,String nosilac_kartice,String korisnik_kartice_id,int stanje) {
+			super();
+			this.id=id;
+			this.tip=tip;
+			this.broj=broj;
+			this.security_code=security_code;
+			this.datum_isteka=datum_isteka;
+			this.nosilac_kartice=nosilac_kartice;
+			this.korisnik_kartice_id=korisnik_kartice_id;
+			this.stanje=stanje;
+		}
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public String getTip() {
+			return tip;
+		}
+
+		public void setTip(String tip) {
+			this.tip = tip;
+		}
+
+		public int getBroj() {
+			return broj;
+		}
+
+		public void setBroj(int broj) {
+			this.broj = broj;
+		}
+
+		public short getSecurity_code() {
+			return security_code;
+		}
+
+		public void setSecurity_code(short security_code) {
+			this.security_code = security_code;
+		}
+
+		public String getDatum_isteka() {
+			return datum_isteka;
+		}
+
+		public void setDatum_isteka(String datum_isteka) {
+			this.datum_isteka = datum_isteka;
+		}
+
+		public String getNosilac_kartice() {
+			return nosilac_kartice;
+		}
+
+		public void setNosilac_kartice(String nosilac_kartice) {
+			this.nosilac_kartice = nosilac_kartice;
+		}
+
+		public String getKorisnik_kartice_id() {
+			return korisnik_kartice_id;
+		}
+
+		public void setKorisnik_kartice_id(String korisnik_kartice_id) {
+			this.korisnik_kartice_id = korisnik_kartice_id;
+		}
+
+		public int getStanje() {
+			return stanje;
+		}
+
+		public void setStanje(int stanje) {
+			this.stanje = stanje;
+		}
+		
+		
+	}
+}
