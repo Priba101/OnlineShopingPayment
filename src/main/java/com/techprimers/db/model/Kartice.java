@@ -28,7 +28,7 @@ public class Kartice {
 
     public Kartice() {}
 
-    /*public Kartice(long id,String tip,int broj,int security_code,
+    public Kartice(long id,String tip,int broj,int security_code,
                      String datum_isteka,String nosilac_kartice,
                      String korisnik_kartice_id,int stanje) {
         super();
@@ -40,7 +40,7 @@ public class Kartice {
         this.nosilac_kartice=nosilac_kartice;
         this.korisnik_kartice_id=korisnik_kartice_id;
         this.stanje=stanje;
-    }*/
+    }
     public long getId() {
         return id;
     }

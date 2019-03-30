@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/rest/kupovina")
 public class KupovinaResource {
-
     @Autowired
     KupovinaRepository kupovinaRepository;
 
@@ -18,11 +17,15 @@ public class KupovinaResource {
     public List<Kupovina> getAll(){
         return kupovinaRepository.findAll();
     }
-
     @PostMapping(value="/load")
-    public List<Kupovina> persist(@RequestBody final Kupovina kupovina){
+    public List<Kupovina> persist(@RequestBody final Kupovina kupovina)
+    {
         kupovinaRepository.save(kupovina);
         return kupovinaRepository.findAll();
     }
-}
 
+    @GetMapping(value="/id")
+    Kupovina getOne(@PathVariable Integer id){
+        return  kupovinaRepository.findById(id);
+    }
+}

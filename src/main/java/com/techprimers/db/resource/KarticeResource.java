@@ -1,9 +1,7 @@
 package com.techprimers.db.resource;
 
 import com.techprimers.db.model.Kartice;
-import com.techprimers.db.model.Users;
 import com.techprimers.db.repository.KarticeRepository;
-import com.techprimers.db.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +26,11 @@ public class KarticeResource {
         karticeRepository.save(kartice);
         return karticeRepository.findAll();
     }
+    @GetMapping(value="/{id}")
+    Kartice getOne(@PathVariable long id){
+        return karticeRepository.findById(id);
+    }
+
 
 }
 

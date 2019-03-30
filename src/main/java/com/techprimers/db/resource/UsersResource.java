@@ -27,4 +27,27 @@ public class UsersResource {
         return usersRepository.findAll();
     }
 
+    @GetMapping(value="/{id}")
+    Users getOne(@PathVariable Integer id){
+        return usersRepository.findById(id);
+    }
+
+    /*@PutMapping(value="{id}")
+    Users replaceUser(@RequestBody Users newUser,@PathVariable Integer id){
+        return usersRepository.findById(id)
+                .map(user ->{
+                    user.setName(newUser.getName());
+                    user.setTeamName(newUser.getTeamName());
+                    user.setSalary(newUser.getSalary());
+                }).orElseGet(()->{
+                   newUser.setId(id);
+                   return usersRepository.save(newUser);
+        });
+    }*/
+
+    @DeleteMapping(value="/{id}")
+    public List<Users> deleteUser(@PathVariable Integer id){
+        usersRepository.delete(id);
+        return usersRepository.findAll();
+    }
 }

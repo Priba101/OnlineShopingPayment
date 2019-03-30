@@ -7,34 +7,50 @@ import javax.persistence.Id;
 
 @Entity
 public class Kupovina {
+
     @Id
     @GeneratedValue
-    @Column(name="kupovina_id")
-    private long kupovina_id;
-    @Column(name="proizvod_id")
-    private long proizvod__id;
-    @Column(name="kolicina")
-    private int kolicina;
-    @Column(name="datum")
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "proizvod_id")
+    private Integer proizvod_id;
+    @Column(name = "kolicina")
+    private Integer kolicina;
+    @Column(name = "date")
     private String date;
-    @Column(name="kartica_id")
-    private long kartica_id;
+    @Column(name = "kartica_id")
+    private Integer kartica_id;
 
-    public Kupovina(){}
+    public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String date,Integer kartica_id) {
+        this.id=id;
+        this.proizvod_id=proizvod_id;
+        this.kolicina=kolicina;
+        this.date=date;
+        this.kartica_id=kartica_id;
 
-    public long getKupovina_id() {
-        return kupovina_id;
     }
 
-    public void setKupovina_id(long kupovina_id) {
-        this.kupovina_id = kupovina_id;
+    public Integer getId() {
+        return id;
     }
 
-    public int getKolicina() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getProizvod_id() {
+        return proizvod_id;
+    }
+
+    public void setProizvod_id(Integer proizvod_id) {
+        this.proizvod_id = proizvod_id;
+    }
+
+    public Integer getKolicina() {
         return kolicina;
     }
 
-    public void setKolicina(int kolicina) {
+    public void setKolicina(Integer kolicina) {
         this.kolicina = kolicina;
     }
 
@@ -46,19 +62,11 @@ public class Kupovina {
         this.date = date;
     }
 
-    public long getKartica_id() {
+    public Integer getKartica_id() {
         return kartica_id;
     }
 
-    public void setKartica_id(long kartica_id) {
+    public void setKartica_id(Integer kartica_id) {
         this.kartica_id = kartica_id;
-    }
-
-    public long getProizvod__id() {
-        return proizvod__id;
-    }
-
-    public void setProizvod__id(long proizvod__id) {
-        this.proizvod__id = proizvod__id;
     }
 }

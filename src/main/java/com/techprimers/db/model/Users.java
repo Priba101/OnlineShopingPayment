@@ -19,7 +19,11 @@ public class Users {
     @Column(name = "salary")
     private Integer salary;
 
-    public Users() {
+    public Users(String name,String teamName,Integer salary) {
+        this.name=name;
+        this.teamName=teamName;
+        this.salary=salary;
+
     }
 
     public Integer getId()
@@ -61,4 +65,5 @@ public class Users {
     {
         this.salary = salary;
     }
+
 }
