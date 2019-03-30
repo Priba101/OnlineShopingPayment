@@ -15,12 +15,14 @@ public class UsersResource {
     UsersRepository usersRepository;
 
     @GetMapping(value = "/all")
-    public List<Users> getAll() {
+    public List<Users> getAll()
+    {
         return usersRepository.findAll();
     }
 
     @PostMapping(value = "/load")
-    public List<Users> persist(@RequestBody final Users users) {
+    public List<Users> persist(@RequestBody final Users users)
+    {
         usersRepository.save(users);
         return usersRepository.findAll();
     }

@@ -22,35 +22,43 @@ public class Users {
     public Users() {
     }
 
-    public Integer getId() {
+    public Integer getId()
+    {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getTeamName() {
+    public String getTeamName()
+    {
         return teamName;
     }
 
-    public void setTeamName(String teamName) {
+    public void setTeamName(String teamName)
+    {
         this.teamName = teamName;
     }
 
-    public Integer getSalary() {
+    public Integer getSalary()
+    {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public void setSalary(Integer salary)
+    {
         this.salary = salary;
     }
 }
