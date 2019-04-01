@@ -5,7 +5,9 @@ import com.techprimers.db.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/rest/users")
@@ -28,15 +30,17 @@ public class UsersResource {
     }
 
     @GetMapping(value="/{id}")
-    Users getOne(@PathVariable Integer id){
+    Users getOne(@PathVariable Integer id)
+    {
         return usersRepository.findById(id);
     }
 
     /*@PutMapping(value="{id}")
     Users replaceUser(@RequestBody Users newUser,@PathVariable Integer id){
+        Map<Users,Integer> map = new HashMap<>();
         return usersRepository.findById(id)
-                .map(user ->{
-                    user.setName(newUser.getName());
+                .map(newUser ->{
+                    newUser
                     user.setTeamName(newUser.getTeamName());
                     user.setSalary(newUser.getSalary());
                 }).orElseGet(()->{
@@ -45,9 +49,8 @@ public class UsersResource {
         });
     }*/
 
-    @DeleteMapping(value="/{id}")
-    public List<Users> deleteUser(@PathVariable Integer id){
-        usersRepository.delete(id);
-        return usersRepository.findAll();
+    @DeleteMapping(value="/delete/{id}")
+    void deleteUser(@PathVariable Integer id){
+        usersRepository.deleteById(id);
     }
 }
