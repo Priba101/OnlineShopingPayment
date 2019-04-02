@@ -24,8 +24,8 @@ public class KupovinaResource {
         return kupovinaRepository.findAll();
     }
 
-    @GetMapping(value="/id")
-    Kupovina getOne(@PathVariable Integer id){
+    @GetMapping(value="/one/{id}")
+    Kupovina getOne(@PathVariable int id){
         return  kupovinaRepository.findById(id);
     }
 }

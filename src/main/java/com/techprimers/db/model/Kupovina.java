@@ -1,9 +1,7 @@
 package com.techprimers.db.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Kupovina {
@@ -18,15 +16,21 @@ public class Kupovina {
     private Integer kolicina;
     @Column(name = "datum")
     private String datum;
-    @Column(name = "kartica_id")
-    private Integer kartica_id;
+
+
+    @ManyToOne
+    @JoinColumn
+    private Korpa korpa;
+
+    @ManyToOne
+    @JoinColumn
+    private Kartice kartice;
 
     public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String datum,Integer kartica_id) {
         this.id=id;
         this.proizvod_id=proizvod_id;
         this.kolicina=kolicina;
         this.datum=datum;
-        this.kartica_id=kartica_id;
 
     }
 
@@ -34,7 +38,7 @@ public class Kupovina {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,11 +66,14 @@ public class Kupovina {
         this.datum=datum;
     }
 
-    public Integer getKartica_id() {
-        return kartica_id;
+    public void setId(Korpa korpa) {
+        this.id=id;
+    }
+    public void SetId(Kartice kartice){
+        this.id=id;
     }
 
-    public void setKartica_id(Integer kartica_id) {
-        this.kartica_id = kartica_id;
+    public void setId(Kartice kartice) {
+        this.kartice=kartice;
     }
 }

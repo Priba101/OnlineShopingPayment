@@ -1,7 +1,6 @@
 package com.techprimers.db.validators;
 
 import com.techprimers.db.model.Korpa;
-import com.techprimers.db.model.Kupovina;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

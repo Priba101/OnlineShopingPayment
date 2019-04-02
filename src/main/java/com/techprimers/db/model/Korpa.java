@@ -1,31 +1,41 @@
 package com.techprimers.db.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import javax.persistence.*;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Data
+@EqualsAndHashCode(exclude = "kupovine")
 @Entity
 public class Korpa {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
-    @Column(name="id_proizvoda")
+    @Column(name = "id_proizvoda")
     private int id_proizvoda;
-    @Column(name="id_korisnika")
+    @Column(name = "id_korisnika")
     private int id_korisnika;
-    @Column(name="broj_proizvoda")
+    @Column(name = "broj_proizvoda")
     private int broj_proizvoda;
+    @Column(name = "kupovina_id")
 
-    public Korpa(int id,int id_proizvoda,int id_korisnika,int broj_proizvoda){
-        super();
-        this.id=id;
-        this.id_proizvoda=id_proizvoda;
-        this.id_korisnika=id_korisnika;
-        this.broj_proizvoda=broj_proizvoda;
+    @OneToMany(mappedBy = "korpa", cascade = CascadeType.ALL)
+    private Set<Kupovina> kupovine;
 
+    public Korpa(int id, int id_proizvoda, int id_korisnika, int broj_proizvoda, Kupovina... kupovine) {
+        this.id = id;
+        this.id_proizvoda = id_proizvoda;
+        this.id_korisnika = id_korisnika;
+        this.broj_proizvoda = broj_proizvoda;
+        this.kupovine = Stream.of(kupovine).collect(Collectors.toSet());
+        this.kupovine.forEach(x -> x.setId(this));
     }
+
     public int getId_korpe() {
         return id;
     }
@@ -58,3 +68,4 @@ public class Korpa {
         this.broj_proizvoda = broj_proizvoda;
     }
 }
+

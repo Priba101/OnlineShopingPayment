@@ -1,9 +1,9 @@
 package com.techprimers.db.model;
 
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 public class Kartice {
@@ -28,12 +28,14 @@ public class Kartice {
     @Column(name="kupovina_id")
     private int kupovina_id;
 
+    @OneToMany(mappedBy = "kartice",cascade = CascadeType.ALL)
+    private Set<Kupovina> kupovine;
     public Kartice() {}
 
     public Kartice(long id,String tip,int broj,int security_code,
                      String datum_isteka,String nosilac_kartice,
                      String korisnik_kartice_id,int stanje,
-                     int kupovina_id) {
+                     int kupovina_id,Kupovina... kupovine) {
         super();
         this.id=id;
         this.tip=tip;
@@ -44,6 +46,8 @@ public class Kartice {
         this.korisnik_kartice_id=korisnik_kartice_id;
         this.stanje=stanje;
         this.kupovina_id=kupovina_id;
+        this.kupovine= Stream.of(kupovine).collect(Collectors.toSet());
+        this.kupovine.forEach(x->x.setId(this));
     }
     public long getId() {
         return id;
