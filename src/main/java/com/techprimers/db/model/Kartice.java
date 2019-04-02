@@ -25,12 +25,15 @@ public class Kartice {
     private String korisnik_kartice_id;
     @Column(name = "stanje")
     private int stanje;
+    @Column(name="kupovina_id")
+    private int kupovina_id;
 
     public Kartice() {}
 
     public Kartice(long id,String tip,int broj,int security_code,
                      String datum_isteka,String nosilac_kartice,
-                     String korisnik_kartice_id,int stanje) {
+                     String korisnik_kartice_id,int stanje,
+                     int kupovina_id) {
         super();
         this.id=id;
         this.tip=tip;
@@ -40,6 +43,7 @@ public class Kartice {
         this.nosilac_kartice=nosilac_kartice;
         this.korisnik_kartice_id=korisnik_kartice_id;
         this.stanje=stanje;
+        this.kupovina_id=kupovina_id;
     }
     public long getId() {
         return id;
@@ -103,5 +107,13 @@ public class Kartice {
 
     public void setStanje(int stanje) {
         this.stanje = stanje;
+    }
+
+    public int getKupovina_id() {
+        return kupovina_id;
+    }
+
+    public void setKupovina_id(int kupovina_id) {
+        this.kupovina_id = kupovina_id;
     }
 }

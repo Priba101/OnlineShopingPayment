@@ -16,16 +16,16 @@ public class Kupovina {
     private Integer proizvod_id;
     @Column(name = "kolicina")
     private Integer kolicina;
-    @Column(name = "date")
-    private String date;
+    @Column(name = "datum")
+    private String datum;
     @Column(name = "kartica_id")
     private Integer kartica_id;
 
-    public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String date,Integer kartica_id) {
+    public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String datum,Integer kartica_id) {
         this.id=id;
         this.proizvod_id=proizvod_id;
         this.kolicina=kolicina;
-        this.date=date;
+        this.datum=datum;
         this.kartica_id=kartica_id;
 
     }
@@ -55,11 +55,11 @@ public class Kupovina {
     }
 
     public String getDate() {
-        return date;
+        return datum;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.datum=datum;
     }
 
     public Integer getKartica_id() {
