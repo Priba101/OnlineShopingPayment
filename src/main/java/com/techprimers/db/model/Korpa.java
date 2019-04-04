@@ -22,6 +22,10 @@ public class Korpa {
     private int id_korisnika;
     @Column(name = "broj_proizvoda")
     private int broj_proizvoda;
+
+    public Korpa() {
+    }
+
     @Column(name = "kupovina_id")
 
     @OneToMany(mappedBy = "korpa", cascade = CascadeType.ALL)

@@ -8,7 +8,8 @@ import org.springframework.validation.Validator;
 public class KorpaValidator implements Validator{
     private final Validator addressValidator;
 
-    public KorpaValidator(Validator addressValidator) {
+    public KorpaValidator(Validator addressValidator)
+    {
         this.addressValidator = addressValidator;
     }
 

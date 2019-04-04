@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface KarticeRepository extends JpaRepository<Kartice, Long> {
 
     Kartice findById(long id);
+
+    void deleteById(int id);
 }
