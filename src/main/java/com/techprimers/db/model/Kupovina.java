@@ -25,6 +25,7 @@ public class Kupovina {
     @ManyToOne
     @JoinColumn
     private Kartice kartice;
+    public Kupovina(){}
 
     public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String datum,Integer kartica_id) {
         this.id=id;
