@@ -27,7 +27,7 @@ public class KarticeResource {
         return new ResponseEntity<Collection<Kartice>>(kartice, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/load")
+    @PostMapping(value = "/insert")
     public ResponseEntity<?> persist(@RequestBody final Kartice kartice)
     {
         Kartice kartica=karticeRepository.findById(kartice.getId());
@@ -61,21 +61,21 @@ public class KarticeResource {
         return new ResponseEntity<Kartice>(kartice,HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/deleteOne/{id}")
+    @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Long id){
         Kartice kartice =karticeRepository.findOne(id);
         if(kartice==null) return new ResponseEntity<>("Ne postoji trazeni podatak!"+id, HttpStatus.OK);
         karticeRepository.delete(kartice);
         return new ResponseEntity<>("Podatak uspjesno obrisan"+id,HttpStatus.OK);
     }
-    @PutMapping(value="/updateDatum/{id}")
+    @PutMapping(value="/datum/{id}")
     public ResponseEntity<?> updateDatum(@PathVariable long id,@RequestBody final Kartice kartice){
         Kartice kartica=karticeRepository.findById(id);
         if(kartica==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);
         kartica.setDatum_isteka(kartice.getDatum_isteka());
         return new ResponseEntity<Kartice>(karticeRepository.save(kartica),HttpStatus.OK);
     }
-    @PutMapping(value="/updateStanje/{id}")
+    @PutMapping(value="/stanje/{id}")
     public ResponseEntity<?> updateStanje(@PathVariable long id,@RequestBody final Kartice kartice){
         Kartice kartica=karticeRepository.findById(id);
         if(kartica==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);

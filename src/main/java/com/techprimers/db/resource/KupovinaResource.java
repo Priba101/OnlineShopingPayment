@@ -25,7 +25,7 @@ public class KupovinaResource {
         }
         return new ResponseEntity<Collection<Kupovina>>(kupovina, HttpStatus.OK);
     }
-    @PostMapping(value="/load")
+    @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Kupovina kupovina)
     {
         Kupovina kupovina1 =kupovinaRepository.findById(kupovina.getId());
@@ -42,7 +42,7 @@ public class KupovinaResource {
         return new ResponseEntity<Collection<Kupovina>>(this.kupovinaRepository.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping(value="/one/{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id){
         Kupovina kupovina=this.kupovinaRepository.findById(id);
         if(kupovina==null){
@@ -51,7 +51,7 @@ public class KupovinaResource {
         return new ResponseEntity<Kupovina>(kupovina,HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/deleteOne/{id}")
+    @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
         Kupovina kupovina=kupovinaRepository.findOne(id);
         if(kupovina==null) return new ResponseEntity<>("Ne postoji trazeni podatak!"+id, HttpStatus.OK);
@@ -59,14 +59,14 @@ public class KupovinaResource {
         return new ResponseEntity<>("Podatak uspjesno obrisan"+id,HttpStatus.OK);
     }
 
-    @PutMapping(value="/updateDatum/{id}")
+    @PutMapping(value="/datum/{id}")
     public ResponseEntity<?> updateDatum(@PathVariable Integer id,@RequestBody final Kupovina kupovine){
         Kupovina kupovina=kupovinaRepository.findById(id);
         if(kupovina==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);
         kupovina.setDate(kupovine.getDate());
         return new ResponseEntity<Kupovina>(kupovinaRepository.save(kupovina),HttpStatus.OK);
     }
-    @PutMapping(value="/updateKolicina/{id}")
+    @PutMapping(value="/kolicina/{id}")
     public ResponseEntity<?> updatekolicina(@PathVariable int id,@RequestBody final Kupovina kupovine){
         Kupovina kupovina=kupovinaRepository.findById(id);
         if(kupovina==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);

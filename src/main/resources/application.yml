@@ -9,3 +9,4 @@ spring:
     generate-ddl: true
     show-sql: true
 
+

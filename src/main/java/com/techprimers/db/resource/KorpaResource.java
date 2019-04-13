@@ -26,7 +26,7 @@ public class KorpaResource {
         return new ResponseEntity<Collection<Korpa>>(korpa, HttpStatus.OK);
     }
 
-    @PostMapping(value="/load")
+    @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Korpa korpa)
     {
         Korpa korpa1=korpaRepository.findById(korpa.getId_korpe());
@@ -39,7 +39,7 @@ public class KorpaResource {
         korpaRepository.save(korpa);
         return new ResponseEntity<Collection<Korpa>>(this.korpaRepository.findAll(),HttpStatus.OK);
     }
-    @GetMapping(value="/one/{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id)
     {
         Korpa korpa=this.korpaRepository.findById(id);
@@ -49,7 +49,7 @@ public class KorpaResource {
         return new ResponseEntity<Korpa>(korpa,HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/deleteOne/{id}")
+    @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
         Korpa korpa=korpaRepository.findOne(id);
         if(korpa==null) return new ResponseEntity<>("Ne postoji trazeni podatak "+id, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class KorpaResource {
         return new ResponseEntity<>("Podatak uspjesno obrisan "+id,HttpStatus.OK);
     }
 
-    @PutMapping(value="/updateBrojProizvoda/{id}")
+    @PutMapping(value="/{id}")
     public ResponseEntity<?> updateOne(@PathVariable Integer id,@RequestBody final Korpa korpa){
         Korpa korpa1=korpaRepository.findOne(id);
         if(korpa1==null) return new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);
