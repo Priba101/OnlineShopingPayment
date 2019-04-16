@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/rest/kartice")
@@ -22,7 +24,9 @@ public class KarticeResource {
     {
         Collection<Kartice> kartice = this.karticeRepository.findAll();
         if (kartice.isEmpty()){
-            return new ResponseEntity<>("Nema podataka u bazi Kartice", HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Nema podataka u bazi Kartice");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         return new ResponseEntity<Collection<Kartice>>(kartice, HttpStatus.OK);
     }
@@ -32,22 +36,34 @@ public class KarticeResource {
     {
         Kartice kartica=karticeRepository.findById(kartice.getId());
         if(kartica == null){
-            return new ResponseEntity<>("Vec postoji podatak sam idom:"+kartica.getId(),HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Vec postoji podatak sam idom:"+kartica.getId());
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(kartica.getStanje()<0){
-            return new ResponseEntity<>("Iznos na kartici mora biti pozitivan broj!",HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Iznos na kartici mora biti pozitivan broj!");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(kartica.getTip().equals(null)){
-            return new ResponseEntity<>("Unesite tip kartice!",HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Unesite tip kartice!");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(kartica.getSecurity_code()==0){
-            return new ResponseEntity<>("Unesite sigurnosni kod kartice!",HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Unesite sigurnosni kod kartice!");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(kartica.getDatum_isteka().equals("")){
-            return new ResponseEntity<>("Unesite datum isteka kartice!",HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Unesite datum isteka kartice!");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(kartica.getBroj()==0){
-            return new ResponseEntity<>("Unesite broj kartice!",HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Unesite broj kartice!");
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         karticeRepository.save(kartice);
         return new ResponseEntity<Collection<Kartice>>(this.karticeRepository.findAll(),HttpStatus.OK);
@@ -56,7 +72,9 @@ public class KarticeResource {
     public ResponseEntity<?> getOne(@PathVariable long id){
         Kartice kartice =this.karticeRepository.findById(id);
         if(kartice==null){
-            return new ResponseEntity<>("Ne postoji unos sa idom:"+id,HttpStatus.OK);
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Ne postoji unos sa idom:"+id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
         return new ResponseEntity<Kartice>(kartice,HttpStatus.OK);
     }
@@ -64,23 +82,42 @@ public class KarticeResource {
     @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Long id){
         Kartice kartice =karticeRepository.findOne(id);
-        if(kartice==null) return new ResponseEntity<>("Ne postoji trazeni podatak!"+id, HttpStatus.OK);
+        if(kartice==null){
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
         karticeRepository.delete(kartice);
-        return new ResponseEntity<>("Podatak uspjesno obrisan"+id,HttpStatus.OK);
+        Map<String,Object> message = new HashMap<String,Object>();
+        message.put("MESSAGE","Podatak uspjesno obrisan"+id);
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
     @PutMapping(value="/datum/{id}")
     public ResponseEntity<?> updateDatum(@PathVariable long id,@RequestBody final Kartice kartice){
         Kartice kartica=karticeRepository.findById(id);
-        if(kartica==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);
+        if(kartica==null){
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Ne postoji trazeni podatak "+id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
         kartica.setDatum_isteka(kartice.getDatum_isteka());
-        return new ResponseEntity<Kartice>(karticeRepository.save(kartica),HttpStatus.OK);
+        karticeRepository.save(kartica);
+        Map<String,Object> message = new HashMap<String,Object>();
+        message.put("MESSAGE","Datum uspjesno izmjenjen "+id);
+        return new ResponseEntity<>(message,HttpStatus.OK);
     }
     @PutMapping(value="/stanje/{id}")
     public ResponseEntity<?> updateStanje(@PathVariable long id,@RequestBody final Kartice kartice){
         Kartice kartica=karticeRepository.findById(id);
-        if(kartica==null) return  new ResponseEntity<>("Ne postoji trazeni podatak "+id,HttpStatus.OK);
+        if(kartica==null){
+            Map<String,Object> message = new HashMap<String,Object>();
+            message.put("MESSAGE","Ne postoji trazeni podatak "+id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
         kartica.setStanje(kartice.getStanje());
-        return new ResponseEntity<Kartice>(karticeRepository.save(kartica),HttpStatus.OK);
+        Map<String,Object> message = new HashMap<String,Object>();
+        message.put("MESSAGE","Uspjesno izmjenjeno stanje "+id);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
 }
