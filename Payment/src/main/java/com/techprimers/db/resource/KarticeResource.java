@@ -2,11 +2,16 @@ package com.techprimers.db.resource;
 
 import com.techprimers.db.model.Kartice;
 import com.techprimers.db.repository.KarticeRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.*;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +24,23 @@ public class KarticeResource {
     @Autowired
     KarticeRepository karticeRepository;
 
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    private DiscoveryClient discoveryClient;
+    @GetMapping(value="/karticaUp")
+    public ResponseEntity<?> getKarticaUp(){
+        String str=null;
+        Kartice kt = restTemplate.getForObject("http://payments/rest/kartice/hello",Kartice.class);
+        System.out.println("poruka"+kt);
+        return new ResponseEntity<Kartice>(kt,HttpStatus.OK);
+    }
+
+    /* @GetMapping(value="usersUp")
+     public ResponseEntity<?> getUsersUp(){
+        //String str = RestTemplate.
+     }*/
     @GetMapping(value = "/all")
     public ResponseEntity<?> getAll()
     {
@@ -31,12 +53,13 @@ public class KarticeResource {
         return new ResponseEntity<Collection<Kartice>>(kartice, HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/insert")
     public ResponseEntity<?> persist(@RequestBody final Kartice kartice)
     {
         Kartice kartica=karticeRepository.findById(kartice.getId());
         Map<String,Object> message = new HashMap<String,Object>();
-        if(kartica == null){
+        /*if(kartica == null){
             message.put("MESSAGE","Vec postoji podatak sam idom:"+kartica.getId());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
@@ -59,7 +82,7 @@ public class KarticeResource {
         if(kartica.getBroj()==0){
             message.put("MESSAGE","Unesite broj kartice!");
             return new ResponseEntity<>(message, HttpStatus.OK);
-        }
+        }*/
         karticeRepository.save(kartice);
         return new ResponseEntity<Collection<Kartice>>(this.karticeRepository.findAll(),HttpStatus.OK);
     }
@@ -75,9 +98,9 @@ public class KarticeResource {
     }
 
     @DeleteMapping(value="/{id}")
-    ResponseEntity<?> deleteOneRecord(@PathVariable Long id){
+    ResponseEntity<?> deleteOneRecord(@PathVariable long id){
         Map<String,Object> message = new HashMap<String,Object>();
-        Kartice kartice =karticeRepository.findOne(id);
+        Kartice kartice =karticeRepository.findById(id);
         if(kartice==null){
             message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -111,6 +134,46 @@ public class KarticeResource {
         message.put("MESSAGE","Uspjesno izmjenjeno stanje "+id);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+    @PostMapping(value="")
+    public Kartice createKartice(@RequestBody @Valid final Kartice kartice, Errors errors) throws Exception {
 
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
+
+        List<ServiceInstance> instances=discoveryClient.getInstances("payments-service");
+        List<ServiceInstance> instances2=discoveryClient.getInstances("artikal-service");
+
+
+        if(instances.isEmpty()) ;
+        ServiceInstance serviceInstance=instances.get(0);
+
+        if(instances2.isEmpty()) ;
+        ServiceInstance serviceInstance2=instances2.get(0);
+
+        String baseUrl=serviceInstance.getUri().toString()+ "/korisnik/insert"; //+id.toString();
+        System.out.println(baseUrl);
+        String baseUrl2=serviceInstance2.getUri().toString()+ "/korisnik/insert"; //+id.toString();
+        System.out.println(baseUrl2);
+
+        String requestJson = "{\"nosilac\":\""  + kartice.getNosilac_kartice() +  "\"}";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response=null;
+        try{
+            response = restTemplate.postForEntity( baseUrl, entity , String.class );
+            RestTemplate restTemplate2 = new RestTemplate();
+            ResponseEntity<String> response2 = restTemplate2 .postForEntity( baseUrl2, entity , String.class );
+            System.out.println(response2.getBody());
+        }catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
+        System.out.println(response.getBody());
+
+        return karticeRepository.save(kartice);
+    }
 }
 

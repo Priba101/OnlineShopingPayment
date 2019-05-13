@@ -32,9 +32,9 @@ public class KupovinaResource {
     @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Kupovina kupovina)
     {
-        Kupovina kupovina1 =kupovinaRepository.findById(kupovina.getId());
+        Kupovina kupovina1 = kupovinaRepository.findById(kupovina.getId());
         Map<String,Object> message = new HashMap<String,Object>();
-        if(kupovina1==null){
+        /*if(kupovina1==null){
             message.put("MESSAGE","Ne postoji unos sa idom:"+kupovina1.getId());
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
@@ -45,7 +45,7 @@ public class KupovinaResource {
         if(kupovina1.getDate().equals("")){
             message.put("MESSAGE","Datum ne smije biti prazan!");
             return new ResponseEntity<>(message, HttpStatus.OK);
-        }
+        }*/
         kupovinaRepository.save(kupovina);
         return new ResponseEntity<Collection<Kupovina>>(this.kupovinaRepository.findAll(),HttpStatus.OK);
     }
@@ -59,12 +59,12 @@ public class KupovinaResource {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         message.put("MESSAGE","Podatak uspjesno dobavljen "+id);
-        return new ResponseEntity<>(message,HttpStatus.OK);
+        return new ResponseEntity<Kupovina>(kupovina,HttpStatus.OK);
     }
 
     @DeleteMapping(value="/{id}")
-    ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
-        Kupovina kupovina=kupovinaRepository.findOne(id);
+    ResponseEntity<?> deleteOneRecord(@PathVariable int id){
+        Kupovina kupovina=kupovinaRepository.findById(id);
         Map<String,Object> message = new HashMap<String,Object>();
         if(kupovina==null){
             message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
@@ -76,14 +76,14 @@ public class KupovinaResource {
     }
 
     @PutMapping(value="/datum/{id}")
-    public ResponseEntity<?> updateDatum(@PathVariable Integer id,@RequestBody final Kupovina kupovine){
+    public ResponseEntity<?> updateDatum(@PathVariable int id,@RequestBody final Kupovina kupovine){
         Kupovina kupovina=kupovinaRepository.findById(id);
         Map<String,Object> message = new HashMap<String,Object>();
         if(kupovina==null){
             message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
-        kupovina.setDate(kupovine.getDate());
+        kupovina.setDatum(kupovine.getDatum());
         kupovinaRepository.save(kupovina);
         message.put("MESSAGE","Datum uspjesno promjenjen "+id);
         return new ResponseEntity<>(message,HttpStatus.OK);

@@ -1,15 +1,19 @@
 package com.techprimers.db.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+@Data
 @Entity
 public class Kartice {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "tip")
@@ -26,17 +30,18 @@ public class Kartice {
     private String korisnik_kartice_id;
     @Column(name = "stanje")
     private int stanje;
-    @Column(name="kupovina_id")
-    private int kupovina_id;
+    //@Column(name="kupovina_id")
+    //private int kupovina_id;
 
     @OneToMany(mappedBy = "kartice",cascade = CascadeType.ALL)
-    private Set<Kupovina> kupovine;
+    @JsonIgnore
+    private Set<Korpa> korpe;
+
     public Kartice() {}
 
     public Kartice(long id,String tip,int broj,int security_code,
-                     String datum_isteka,String nosilac_kartice,
-                     String korisnik_kartice_id,int stanje,
-                     int kupovina_id,Kupovina... kupovine) {
+                   String datum_isteka,String nosilac_kartice,
+                   String korisnik_kartice_id,int stanje,Korpa... korpe) {
         super();
         this.id=id;
         this.tip=tip;
@@ -46,9 +51,9 @@ public class Kartice {
         this.nosilac_kartice=nosilac_kartice;
         this.korisnik_kartice_id=korisnik_kartice_id;
         this.stanje=stanje;
-        this.kupovina_id=kupovina_id;
-        this.kupovine= Stream.of(kupovine).collect(Collectors.toSet());
-        this.kupovine.forEach(x->x.setId(this));
+        //this.kupovina_id=kupovina_id;
+        this.korpe=Stream.of(korpe).collect(Collectors.toSet());
+        this.korpe.forEach(x->x.setKartica(this));
     }
     public long getId() {
         return id;
@@ -114,11 +119,11 @@ public class Kartice {
         this.stanje = stanje;
     }
 
-    public int getKupovina_id() {
+    /*public int getKupovina_id() {
         return kupovina_id;
     }
 
     public void setKupovina_id(int kupovina_id) {
         this.kupovina_id = kupovina_id;
-    }
+    }*/
 }

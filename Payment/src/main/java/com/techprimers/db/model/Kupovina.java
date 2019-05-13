@@ -1,8 +1,12 @@
 package com.techprimers.db.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class Kupovina {
 
@@ -10,45 +14,28 @@ public class Kupovina {
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
-    @Column(name = "proizvod_id")
-    private Integer proizvod_id;
+    @Column(name = "proizvodId")
+    private Integer proizvodId;
     @Column(name = "kolicina")
     private Integer kolicina;
     @Column(name = "datum")
     private String datum;
 
-
     @ManyToOne
     @JoinColumn
     private Korpa korpa;
 
-    @ManyToOne
-    @JoinColumn
-    private Kartice kartice;
     public Kupovina(){}
 
-    public Kupovina(Integer id,Integer proizvod_id,Integer kolicina,String datum,Integer kartica_id) {
+    public Kupovina(Integer id,Integer proizvodId,Integer kolicina,String datum) {
         this.id=id;
-        this.proizvod_id=proizvod_id;
+        this.proizvodId=proizvodId;
         this.kolicina=kolicina;
         this.datum=datum;
-
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Integer getProizvod_id() {
-        return proizvod_id;
-    }
-
-    public void setProizvod_id(Integer proizvod_id) {
-        this.proizvod_id = proizvod_id;
+    public void setKorpa(Korpa korpa) {
+        this.korpa=korpa;
     }
 
     public Integer getKolicina() {
@@ -59,22 +46,15 @@ public class Kupovina {
         this.kolicina = kolicina;
     }
 
-    public String getDate() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDate(String date) {
-        this.datum=datum;
+    public void setDatum(String datum) {
+        this.datum = datum;
     }
 
-    public void setId(Korpa korpa) {
-        this.id=id;
-    }
-    public void SetId(Kartice kartice){
-        this.id=id;
-    }
-
-    public void setId(Kartice kartice) {
-        this.kartice=kartice;
+    public int getId() {
+        return id;
     }
 }
