@@ -22,8 +22,8 @@ public class KorpaResource {
     public ResponseEntity<?> getAll()
     {
         Collection<Korpa> korpa = this.korpaRepository.findAll();
+        Map<String,Object> message = new HashMap<String,Object>();
         if (korpa.isEmpty()){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Nema podataka u bazi Korpa");
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
@@ -34,13 +34,12 @@ public class KorpaResource {
     public ResponseEntity<?> persist(@RequestBody final Korpa korpa)
     {
         Korpa korpa1=korpaRepository.findById(korpa.getId_korpe());
+        Map<String,Object> message = new HashMap<String,Object>();
         if(korpa1==null){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Ne postoji unos");
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         if(korpa1.getBroj_proizvoda()==0){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Broj proizvoda ne smije biti jednak nuli!");
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
@@ -51,8 +50,8 @@ public class KorpaResource {
     public ResponseEntity<?> getOne(@PathVariable int id)
     {
         Korpa korpa=this.korpaRepository.findById(id);
+        Map<String,Object> message = new HashMap<String,Object>();
         if(korpa==null){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Ne postoji unos sa idom:"+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
@@ -61,29 +60,27 @@ public class KorpaResource {
 
     @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
+        Map<String,Object> message = new HashMap<String,Object>();
         Korpa korpa=korpaRepository.findOne(id);
         if(korpa==null){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Ne postoji trazeni podatak "+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         korpaRepository.delete(korpa);
-        Map<String,Object> message = new HashMap<String,Object>();
         message.put("MESSAGE","Podatak uspjesno obrisan "+id);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @PutMapping(value="/{id}")
     public ResponseEntity<?> updateOne(@PathVariable Integer id,@RequestBody final Korpa korpa){
+        Map<String,Object> message = new HashMap<String,Object>();
         Korpa korpa1=korpaRepository.findOne(id);
         if(korpa1==null){
-            Map<String,Object> message = new HashMap<String,Object>();
             message.put("MESSAGE","Ne postoji trazeni podatak "+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         korpa1.setBroj_proizvoda(korpa.getBroj_proizvoda());
         korpaRepository.save(korpa1);
-        Map<String,Object> message = new HashMap<String,Object>();
         message.put("MESSAGE","Uspjesno izmjenjen broj proizvoda!");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

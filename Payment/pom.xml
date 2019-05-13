@@ -6,7 +6,10 @@
 	<groupId>com.techprimers.db</groupId>
 	<artifactId>spring-boot-mysqldb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <modules>
+        <module>eureka-nwt</module>
+    </modules>
+    <packaging>pom</packaging>
 
 	<name>spring-boot-cleardb</name>
 	<description>Demo project for Spring Boot</description>
