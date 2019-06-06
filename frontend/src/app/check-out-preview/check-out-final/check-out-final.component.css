@@ -1,0 +1,9 @@
+.row{
+    padding: 0%;
+  }
+  .col{
+    border: 1px solid black;
+  }
+.container{
+    border:1px solid black;
+}
