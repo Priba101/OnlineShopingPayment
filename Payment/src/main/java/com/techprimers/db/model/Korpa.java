@@ -54,6 +54,5 @@ public class Korpa {
     public void setBrojProizvoda(int brojProizvoda) {
         this.brojProizvoda = brojProizvoda;
     }
-
 }
 

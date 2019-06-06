@@ -1,4 +1,4 @@
-package com.techprimers.db.validators;
+/*package com.techprimers.db.validators;
 
 import com.techprimers.db.model.Korpa;
 import org.springframework.validation.Errors;
@@ -19,7 +19,7 @@ public class KorpaValidator implements Validator{
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
+    /*public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"brojproizvoda","field.required ");
         Korpa korpa = (Korpa) o;
         try{
@@ -38,3 +38,4 @@ public class KorpaValidator implements Validator{
         }
     }
 }
+*/

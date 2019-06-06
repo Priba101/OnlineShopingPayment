@@ -54,7 +54,7 @@ public class Kupovina {
         this.datum = datum;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 }

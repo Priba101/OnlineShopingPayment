@@ -33,7 +33,7 @@ public class KupovinaValidator implements Validator{
     public void validateDate(Object o, Errors e){
         ValidationUtils.rejectIfEmpty(e,"date","date.empty");
         Kupovina k = (Kupovina) o;
-        if(k.getDate().equals(" ")){
+        if(k.getDatum().equals(" ")){
             e.rejectValue("date","emtpyslot");
         }
     }

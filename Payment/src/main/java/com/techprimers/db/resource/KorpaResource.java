@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class KorpaResource {
     public List<Korpa> getAll(){
         return korpaRepository.findAll();
     }*/
-
+    @CrossOrigin
     @GetMapping(value="/all")
     public ResponseEntity<?> getAll()
     {
@@ -36,7 +36,7 @@ public class KorpaResource {
         }
         return new ResponseEntity<Collection<Korpa>>(korpa, HttpStatus.OK);
     }
-
+    @CrossOrigin
     @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Korpa korpa)
     {
@@ -53,6 +53,7 @@ public class KorpaResource {
         korpaRepository.save(korpa);
         return new ResponseEntity<Collection<Korpa>>(this.korpaRepository.findAll(),HttpStatus.OK);
     }
+    @CrossOrigin
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id)
     {
@@ -64,11 +65,11 @@ public class KorpaResource {
         }
         return new ResponseEntity<Korpa>(korpa,HttpStatus.OK);
     }
-
+    @CrossOrigin
     @DeleteMapping(value="/{id}")
-    ResponseEntity<?> deleteOneRecord(@PathVariable int id){
-        Korpa korpa = this.korpaRepository.findById(id);
+    ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
         Map<String,Object> message = new HashMap<String,Object>();
+        Korpa korpa=korpaRepository.findOne(id);
         if(korpa==null){
             message.put("MESSAGE","Ne postoji trazeni podatak "+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -77,11 +78,11 @@ public class KorpaResource {
         message.put("MESSAGE","Podatak uspjesno obrisan "+id);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
+    @CrossOrigin
     @PutMapping(value="/{id}")
-    public ResponseEntity<?> updateOne(@PathVariable int id,@RequestBody final Korpa korpa){
+    public ResponseEntity<?> updateOne(@PathVariable Integer id,@RequestBody final Korpa korpa){
         Map<String,Object> message = new HashMap<String,Object>();
-        Korpa korpa1=korpaRepository.findById(id);
+        Korpa korpa1=korpaRepository.findOne(id);
         if(korpa1==null){
             message.put("MESSAGE","Ne postoji trazeni podatak "+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -91,5 +92,4 @@ public class KorpaResource {
         message.put("MESSAGE","Uspjesno izmjenjen broj proizvoda!");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
 }
