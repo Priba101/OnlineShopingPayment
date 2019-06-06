@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-lg-6 col-md-12">
+<div class="col-lg-12 col-md-12">
   <div class="card">
     <div class="card-header">
       <div class="text-center"><h4 >Kartice</h4></div>
@@ -14,9 +14,11 @@
           <th>Security kod</th>
           <th>Stanje</th>
           <th>Tip</th>
+          <th></th>
         </thead>
         <tbody>
             <tr *ngFor="let kartica of nizkartica">
+              <td>{{kartica.id}}</td>
               <td>{{kartica.broj}}</td>
               <td>{{kartica.datum_isteka}}</td>
               <td>{{kartica.korisnik_kartice_id}}</td>
@@ -24,6 +26,7 @@
               <td>{{kartica.security_code}}</td>
               <td>{{kartica.stanje}}</td>
               <td>{{kartica.tip}}</td>
+              <td><button class="btn" (click)="deleteKartica()" >Delete</button></td>
              </tr>
         </tbody>
       </table>
@@ -33,7 +36,7 @@
 </div>
 <br>
 <div class="row">
-<div class="col-lg-6 col-md-12">
+<div class="col-lg-12 col-md-12">
 <form (ngSubmit)="submitKartica($event)">
     <input type="text" class="form-control" required placeholder="Broj" name="broj">
     <input type="text" class="form-control"  placeholder="Datum isteka" name="datum_isteka">

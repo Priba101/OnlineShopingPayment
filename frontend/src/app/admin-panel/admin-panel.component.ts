@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {PaymentManagementService} from '../_services/management/payment-management.service';
 import {Kartice} from '../_services/management/kartice';
+import { ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -8,15 +10,18 @@ import {Kartice} from '../_services/management/kartice';
 })
 export class AdminPanelComponent implements OnInit {
 
+  @Input() kartica:Kartice;
+  @Output() onDeleted = new EventEmitter<boolean>();
   newKartica:Kartice=new Kartice();
   kartice:Kartice;
   nizkartica:Kartice[];
-  constructor(public admins:PaymentManagementService) { }
+  constructor(public admins:PaymentManagementService,private route: ActivatedRoute,private location: Location) { }
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
     this.nizkartica=[];
     this.test();
-    this.refreshKartice();
+   // this.refreshKartice();
   }
 
   async test(){
@@ -45,11 +50,14 @@ export class AdminPanelComponent implements OnInit {
     const data = await this.admins.InsertKartice(this.newKartica);
     console.log("done");
   }
-  async refreshKartice(){
+  /*async refreshKartice(){
     const data = await this.admins.AllKartice();
     if (data!=undefined && data._embedded!=undefined)
     this.nizkartica=data._embedded.karticeEntities;
     else this.nizkartica=[]
-  }
+  }*/
 
+  async deleteKartica(id:number){
+    await this.admins.DeleteOneKartica(this.kartice.id);
+  }
 }
