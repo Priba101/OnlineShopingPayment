@@ -30,6 +30,7 @@ public class Kartice {
     private String korisnik_kartice_id;
     @Column(name = "stanje")
     private int stanje;
+
     //@Column(name="kupovina_id")
     //private int kupovina_id;
 

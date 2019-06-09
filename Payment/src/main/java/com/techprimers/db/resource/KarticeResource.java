@@ -2,17 +2,13 @@ package com.techprimers.db.resource;
 
 import com.techprimers.db.model.Kartice;
 import com.techprimers.db.repository.KarticeRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.Valid;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -90,6 +86,16 @@ public class KarticeResource {
         karticeRepository.save(kartice);
         return new ResponseEntity<Collection<Kartice>>(this.karticeRepository.findAll(),HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @PostMapping(value = "/insertKartica")
+    public ResponseEntity<?> persist(@PathVariable long id,@RequestBody final Kartice kartice)
+    {
+        Kartice kartica=karticeRepository.findById(kartice.getId());
+        karticeRepository.save(kartice);
+        return new ResponseEntity<Collection<Kartice>>(this.karticeRepository.findAll(),HttpStatus.OK);
+    }
+
     @CrossOrigin
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getOne(@PathVariable long id){
@@ -140,6 +146,13 @@ public class KarticeResource {
         kartica.setStanje(kartice.getStanje());
         message.put("MESSAGE","Uspjesno izmjenjeno stanje "+id);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping(value="/kartica_id")
+    long karticaByUrl(@RequestBody final Long kartica){
+        Kartice kartice=karticeRepository.findById(kartica);
+        return kartice.getId();
     }
     /*@PostMapping(value="")
     public Kartice createKartice(@RequestBody @Valid final Kartice kartice, Errors errors) throws Exception {
