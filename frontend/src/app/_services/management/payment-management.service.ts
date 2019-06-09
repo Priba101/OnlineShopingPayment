@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Kartice} from './kartice';
 import {Korpa} from './korpa';
 import{Kupovina} from './kupovina';
+import{Checkout} from './checkout';
 //import {OktaService} from '../auth/okta.service'
 const baseUrl='http://localhost:8083'
 @Injectable({
@@ -76,5 +77,7 @@ export class PaymentManagementService{
     UpdateKolicina(id:number,kupovina:Kupovina){
         return this.request('put',baseUrl+'/rest/kupovina/datum/kolicina/'+String(id),kupovina)
     }
-
+    InsertKartica(id:number,kupnja:Checkout){
+        return this.request('post',baseUrl+'/rest/kartice/insertKartica',kupnja)
+    }
 }

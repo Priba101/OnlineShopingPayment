@@ -1,41 +1,34 @@
 <div class="container col-md-6">
+  <form class="text-center" (ngSubmit)="submitCheckout($event)">
   <div class="row">
   <div class="col col-md-6">
     <legend class="text-center">Personal Information</legend>
-    <form class="text-center">
         <label>Name</label><br>
-        <input size="20" type="text"/><hr>
-        <label>Surname</label><br>
-        <input size="20" type="number"/><hr>
+        <input size="20" type="text" name="name"/><hr>
         <label>Address</label><br>
-        <input size="20" type="number"/><hr>
-        <label>Country</label><br>
-        <input size="20" type="text"/><hr>
+        <input size="20" type="text" name="address"/><hr>
+        <label>Email</label><br>
+        <input size="20" type="text" name="email"/><hr>
         <label>City</label><br>
-        <input size="20" type="date"/><hr>
+        <input size="20" type="text" name="city"/><hr>
         <label>ZIP</label><br>
-        <input size="20" type="number"/><br>
+        <input size="20" type="number" name="zip"/><br>
         <br>
-    </form>
   </div>
   <div class="col col-md-6">
     <legend class="text-center">Credit Card information</legend>
-    <form class="text-center">
-    <label>Card Type</label><br>
-    <input size="20" type="text"/><hr>
     <label>Card Number</label><br>
-    <input size="20" type="number"/><hr>
+    <input size="20" type="number" name="cardNumber"/><hr>
     <label>Security Code</label><br>
-    <input size="20" type="number"/><hr>
-    <label>Card Type</label><br>
-    <input size="20" type="text"/><hr>
-    <label>Expiration date</label><br>
-    <input size="20" type="date"/><br>
+    <input size="20" type="number" name="securityCode"/><hr>
+    <label>Expiration month</label><br>
+    <input size="20" type="text" name="expirationMonth"/><br><hr>
+    <label>Expiration year</label><br>
+    <input size="20" type="text" name="expirationYear"/><br>
     <hr>
-    <label>Total: 3500.95 KM</label>
-    <a href="#"><img src="https://i.ibb.co/3y71sM1/card.png" alt="card" border="0"></a>
-  </form>
+    <label>{{purchase.total}} KM</label>
+    <a href="#"><img src="https://i.ibb.co/3y71sM1/card.png" alt="card" ></a>
   </div>
 </div>
-
+</form>
 </div>

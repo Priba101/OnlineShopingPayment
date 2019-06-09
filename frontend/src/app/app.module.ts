@@ -4,7 +4,6 @@ import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {  RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {APP_BASE_HREF} from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +35,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,     
-    HttpClientModule,        
+    HttpClientModule,             
     RouterModule.forRoot([
       {path:'', redirectTo:'/main-page',pathMatch:'full'},
       {path:'main-page',component:MainPageComponent},
@@ -47,7 +46,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
       {path:'admin',component:AdminPanelComponent}
     ])
   ],
-  providers: [NgbActiveModal,{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent],
   exports: [LoginComponent]
