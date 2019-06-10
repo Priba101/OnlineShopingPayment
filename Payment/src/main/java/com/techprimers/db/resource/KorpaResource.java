@@ -40,7 +40,7 @@ public class KorpaResource {
     @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Korpa korpa)
     {
-        Korpa korpa1=korpaRepository.findById(korpa.getId());
+        //Korpa korpa1=korpaRepository.findById(korpa.getId());
         Map<String,Object> message = new HashMap<String,Object>();
         /*if(korpa1==null){
             message.put("MESSAGE","Ne postoji unos");

@@ -9,4 +9,5 @@ export class Checkout{
     securityCode:number;
     expirationMonth:number;
     expirationYear:number;
+    amount:number;
 }

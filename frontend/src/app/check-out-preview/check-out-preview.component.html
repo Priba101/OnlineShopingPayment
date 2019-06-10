@@ -5,6 +5,7 @@
         <h4 class="card-title">Cart Overview</h4>
       </div>
       <div>
+        <form action="submit" (ngSubmit)="payUp($event)">
         <table class="table">
           <thead>
             <th>Articles</th>
@@ -15,8 +16,11 @@
           </thead>
           <tbody>
             <!-- ispis ovdje ide-->
+            <input type="text" name="amount">
           </tbody>
         </table>
+        <button type="submit">KUPI</button>
+        </form>
         <hr>
         <label>Proceed to Check Out!</label>
         <br>
