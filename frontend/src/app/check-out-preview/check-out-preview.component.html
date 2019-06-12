@@ -14,12 +14,14 @@
             <th>Total</th>
             <th>Specialization</th>
           </thead>
-          <tbody>
-            <!-- ispis ovdje ide-->
-            <input type="text" name="amount">
+          <tbody *ngFor="let article of articles">
+            <td>{{article.number}}</td>
+            <td>{{article.price}}</td>
+            <td>{{article.quantity}}</td>
+            <td>{{article.total}}</td>
+            <td>{{article.sp}}</td>
           </tbody>
         </table>
-        <button type="submit">KUPI</button>
         </form>
         <hr>
         <label>Proceed to Check Out!</label>
