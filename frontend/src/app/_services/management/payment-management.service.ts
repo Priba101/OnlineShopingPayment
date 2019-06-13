@@ -80,7 +80,7 @@ export class PaymentManagementService{
     InsertKartica(id:number,kupnja:Checkout){
         return this.request('post',baseUrl+'/rest/kartice/insertKartica',kupnja)
     }
-    PayUp(kupnja:Checkout){
-        return this.request('post',baseUrl+'/rest/charge/createCharge',kupnja)
+    PayUp(amount:number){
+        return this.request('post',baseUrl+'/rest/payment'+String(amount))
     }
 }

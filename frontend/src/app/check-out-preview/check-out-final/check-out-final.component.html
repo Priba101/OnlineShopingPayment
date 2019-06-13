@@ -1,21 +1,7 @@
 <div class="container col-md-6">
-  <form class="text-center" (ngSubmit)="submitCheckout($event)">
+  <form class="text-center" (ngSubmit)="payUp($event)">
   <div class="row">
-  <div class="col col-md-6">
-    <legend class="text-center">Personal Information</legend>
-        <label>Name</label><br>
-        <input size="20" type="text" name="name"/><hr>
-        <label>Address</label><br>
-        <input size="20" type="text" name="address"/><hr>
-        <label>Email</label><br>
-        <input size="20" type="text" name="email"/><hr>
-        <label>City</label><br>
-        <input size="20" type="text" name="city"/><hr>
-        <label>ZIP</label><br>
-        <input size="20" type="number" name="zip"/><br>
-        <br>
-  </div>
-  <div class="col col-md-6">
+  <div class="col col-md-12">
     <legend class="text-center">Credit Card information</legend>
     <label>Card Number</label><br>
     <input size="20" type="number" name="cardNumber"/><hr>
@@ -26,7 +12,7 @@
     <label>Expiration year</label><br>
     <input size="20" type="text" name="expirationYear"/><br>
     <hr>
-    <label>{{purchase.total}} KM</label>
+    <label>{{total}}}</label>
     <a href="#"><img src="https://i.ibb.co/3y71sM1/card.png" alt="card" ></a>
   </div>
 </div>

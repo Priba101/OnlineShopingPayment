@@ -5,21 +5,19 @@
         <h4 class="card-title">Cart Overview</h4>
       </div>
       <div>
-        <form action="submit" (ngSubmit)="payUp($event)">
+        <form action="submit">
         <table class="table">
           <thead>
             <th>Articles</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
-            <th>Specialization</th>
           </thead>
           <tbody *ngFor="let article of articles">
             <td>{{article.number}}</td>
             <td>{{article.price}}</td>
             <td>{{article.quantity}}</td>
             <td>{{article.total}}</td>
-            <td>{{article.sp}}</td>
           </tbody>
         </table>
         </form>
