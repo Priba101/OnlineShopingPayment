@@ -1,5 +1,6 @@
 package com.techprimers.db;
 
+
 import com.techprimers.db.model.Kartice;
 import com.techprimers.db.model.Korpa;
 import com.techprimers.db.model.Kupovina;

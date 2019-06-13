@@ -32,9 +32,9 @@ public class KarticeResource {
     @CrossOrigin
     @GetMapping(value="usersUp")
     public ResponseEntity<?> getUsersUp(){
-       String str = restTemplate.getForObject("http://USERS/rest/users/hello",String.class);
-       System.out.println("poruka"+str);
-       return new ResponseEntity<String>(str,HttpStatus.OK);
+        String str = restTemplate.getForObject("http://USERS/rest/users/hello",String.class);
+        System.out.println("poruka"+str);
+        return new ResponseEntity<String>(str,HttpStatus.OK);
     }
     @CrossOrigin
     @GetMapping(value = "/all")
@@ -107,11 +107,11 @@ public class KarticeResource {
         }
         return new ResponseEntity<Kartice>(kartice,HttpStatus.OK);
     }
-    @CrossOrigin
+    /*@CrossOrigin
     @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Long id){
         Map<String,Object> message = new HashMap<String,Object>();
-        Kartice kartice =karticeRepository.findOne(id);
+        Kartice kartice = karticeRepository.findById(id);
         if(kartice==null){
             message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -119,7 +119,7 @@ public class KarticeResource {
         karticeRepository.delete(kartice);
         message.put("MESSAGE","Podatak uspjesno obrisan"+id);
         return new ResponseEntity<>(message,HttpStatus.OK);
-    }
+    }*/
     @CrossOrigin
     @PutMapping(value="/datum/{id}")
     public ResponseEntity<?> updateDatum(@PathVariable long id,@RequestBody final Kartice kartice){
@@ -148,7 +148,7 @@ public class KarticeResource {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @CrossOrigin
+   /* @CrossOrigin
     @PostMapping(value="/kartica_id")
     long karticaByUrl(@RequestBody final Long kartica){
         Kartice kartice=karticeRepository.findById(kartica);
@@ -197,4 +197,3 @@ public class KarticeResource {
     }*/
 
 }
-

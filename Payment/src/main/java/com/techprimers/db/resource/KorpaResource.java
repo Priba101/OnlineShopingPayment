@@ -6,13 +6,13 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @Data
 @RestController
 @RequestMapping(value="/rest/korpa")
@@ -65,11 +65,11 @@ public class KorpaResource {
         }
         return new ResponseEntity<Korpa>(korpa,HttpStatus.OK);
     }
-    @CrossOrigin
+    /*@CrossOrigin
     @DeleteMapping(value="/{id}")
     ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
         Map<String,Object> message = new HashMap<String,Object>();
-        Korpa korpa=korpaRepository.findOne(id);
+        Korpa korpa = korpaRepository.findById(id);
         if(korpa==null){
             message.put("MESSAGE","Ne postoji trazeni podatak "+id);
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -91,5 +91,5 @@ public class KorpaResource {
         korpaRepository.save(korpa1);
         message.put("MESSAGE","Uspjesno izmjenjen broj proizvoda!");
         return new ResponseEntity<>(message, HttpStatus.OK);
-    }
+    }*/
 }
