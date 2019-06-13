@@ -40,8 +40,8 @@ public class Kartice {
     public Kartice() {}
 
     public Kartice(long id,String tip,int broj,int security_code,
-                   String datum_isteka,String nosilac_kartice,
-                   String korisnik_kartice_id,int stanje,Korpa... korpe) {
+                     String datum_isteka,String nosilac_kartice,
+                     String korisnik_kartice_id,int stanje,Korpa... korpe) {
         super();
         this.id=id;
         this.tip=tip;

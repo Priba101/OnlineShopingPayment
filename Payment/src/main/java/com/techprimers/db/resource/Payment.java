@@ -18,21 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-//@RequestMapping(value = "/rest/payment")
+@RequestMapping(value = "/rest/payment")
 public class Payment {
-    public static void main(String[] args) throws StripeException {
-        Stripe.apiKey="sk_test_pX7KwrP5dO6a07OZZnwsnC9800uGwzZjkY";
-        Customer c= Customer.retrieve("cus_FDqWz3wte0a86R");
-
-        Map<String,Object> chargeParams = new HashMap<String,Object>();
-        chargeParams.put("amount","10000");
-        chargeParams.put("currency","usd");
-        chargeParams.put("customer",c.getId());
-
-        Charge.create(chargeParams);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    }
-    /*@Value("${stripe.keys.public}")
+    @Value("${stripe.keys.public}")
     private String API_PUBLIC_KEY;
 
     private StripeService stripeService;
@@ -59,7 +47,7 @@ public class Payment {
         message.put("MESSAGE","PROSLO AM DALJE");
         return new ResponseEntity<>(message,HttpStatus.OK);
 
-    }*/
+    }
 }
 
 
