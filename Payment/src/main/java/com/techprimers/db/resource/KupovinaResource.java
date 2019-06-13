@@ -17,7 +17,7 @@ import java.util.Map;
 public class KupovinaResource {
     @Autowired
     KupovinaRepository kupovinaRepository;
-
+    @CrossOrigin
     @GetMapping(value="/all")
     public ResponseEntity<?> getAll()
     {
@@ -29,10 +29,12 @@ public class KupovinaResource {
         }
         return new ResponseEntity<Collection<Kupovina>>(kupovina, HttpStatus.OK);
     }
+    /*@CrossOrigin
     @PostMapping(value="/insert")
     public ResponseEntity<?> persist(@RequestBody final Kupovina kupovina)
     {
-        Kupovina kupovina1 = kupovinaRepository.findById(kupovina.getId());
+        System.out.println(kupovina.getId());
+        Kupovina kupovina1 =kupovinaRepository.findById(kupovina.getId());
         Map<String,Object> message = new HashMap<String,Object>();
         /*if(kupovina1==null){
             message.put("MESSAGE","Ne postoji unos sa idom:"+kupovina1.getId());
@@ -45,11 +47,11 @@ public class KupovinaResource {
         if(kupovina1.getDate().equals("")){
             message.put("MESSAGE","Datum ne smije biti prazan!");
             return new ResponseEntity<>(message, HttpStatus.OK);
-        }*/
+        }
         kupovinaRepository.save(kupovina);
         return new ResponseEntity<Collection<Kupovina>>(this.kupovinaRepository.findAll(),HttpStatus.OK);
-    }
-
+    }*/
+    @CrossOrigin
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id){
         Kupovina kupovina=this.kupovinaRepository.findById(id);
@@ -61,10 +63,10 @@ public class KupovinaResource {
         message.put("MESSAGE","Podatak uspjesno dobavljen "+id);
         return new ResponseEntity<Kupovina>(kupovina,HttpStatus.OK);
     }
-
+    /*@CrossOrigin
     @DeleteMapping(value="/{id}")
-    ResponseEntity<?> deleteOneRecord(@PathVariable int id){
-        Kupovina kupovina=kupovinaRepository.findById(id);
+    ResponseEntity<?> deleteOneRecord(@PathVariable Integer id){
+        Kupovina kupovina=kupovinaRepository.findOne(id);
         Map<String,Object> message = new HashMap<String,Object>();
         if(kupovina==null){
             message.put("MESSAGE","Ne postoji trazeni podatak!"+id);
@@ -74,9 +76,9 @@ public class KupovinaResource {
         message.put("MESSAGE","Podatak uspjesno obrisan "+id);
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
-
+    @CrossOrigin
     @PutMapping(value="/datum/{id}")
-    public ResponseEntity<?> updateDatum(@PathVariable int id,@RequestBody final Kupovina kupovine){
+    public ResponseEntity<?> updateDatum(@PathVariable Integer id,@RequestBody final Kupovina kupovine){
         Kupovina kupovina=kupovinaRepository.findById(id);
         Map<String,Object> message = new HashMap<String,Object>();
         if(kupovina==null){
@@ -87,7 +89,8 @@ public class KupovinaResource {
         kupovinaRepository.save(kupovina);
         message.put("MESSAGE","Datum uspjesno promjenjen "+id);
         return new ResponseEntity<>(message,HttpStatus.OK);
-    }
+    }*/
+    @CrossOrigin
     @PutMapping(value="/kolicina/{id}")
     public ResponseEntity<?> updatekolicina(@PathVariable int id,@RequestBody final Kupovina kupovine){
         Kupovina kupovina=kupovinaRepository.findById(id);

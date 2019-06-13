@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 @Data
 @Entity
 public class Kartice {
@@ -30,6 +29,7 @@ public class Kartice {
     private String korisnik_kartice_id;
     @Column(name = "stanje")
     private int stanje;
+
     //@Column(name="kupovina_id")
     //private int kupovina_id;
 
@@ -53,7 +53,9 @@ public class Kartice {
         this.stanje=stanje;
         //this.kupovina_id=kupovina_id;
         this.korpe=Stream.of(korpe).collect(Collectors.toSet());
-        this.korpe.forEach(x->x.setKartica(this));
+        this.korpe.forEach(x-> {
+            x.setKartica(this);
+        });
     }
     public long getId() {
         return id;

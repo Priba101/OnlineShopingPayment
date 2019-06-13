@@ -1,16 +1,3 @@
-#spring:
- # datasource:
-  #  driverClassName: com.mysql.jdbc.Driver
-   # url: jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7291155
-    #username: sql7291155
-    #password: 1SKY8jmI7x
-  #jpa:
-   # hibernate.ddl-auto: update
-    #generate-ddl: true
-    #show-sql: true
-#url: jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7286629
-#    #username: sql7286629
-#    #password: pjfQgt9MSZ
 spring:
   application:
     name: PAYMENTS
