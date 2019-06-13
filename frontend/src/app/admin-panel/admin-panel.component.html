@@ -1,0 +1,49 @@
+<div class="row">
+<div class="col-lg-6 col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="text-center"><h4 >Kartice</h4></div>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table">
+        <thead >
+          <th>Broj Kartice</th>
+          <th>Datum isteka</th>
+          <th>Korisnik kartice</th>
+          <th>Nosilac kartice</th>
+          <th>Security kod</th>
+          <th>Stanje</th>
+          <th>Tip</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let kartica of nizkartica">
+              <td>{{kartica.broj}}</td>
+              <td>{{kartica.datum_isteka}}</td>
+              <td>{{kartica.korisnik_kartice_id}}</td>
+              <td>{{kartica.nosilac_kartice}}</td>
+              <td>{{kartica.security_code}}</td>
+              <td>{{kartica.stanje}}</td>
+              <td>{{kartica.tip}}</td>
+             </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-lg-6 col-md-12">
+<form (ngSubmit)="submitKartica($event)">
+    <input type="text" class="form-control" required placeholder="Broj" name="broj">
+    <input type="text" class="form-control"  placeholder="Datum isteka" name="datum_isteka">
+    <input type="text" class="form-control"  placeholder="Korisnik kartice id" name ="korisnik_kartice_id">
+    <input type="text" class="form-control"  placeholder="Nosilac kartice"name ="nosilac_kartice">
+    <input type="text" class="form-control"  placeholder="Security code" name="security_code">
+    <input type="text" class="form-control"  placeholder="Stanje" name="stanje">
+    <input type="text" class="form-control"  placeholder="Tip" name="tip">
+  <div class="text-center"><button type="submit" >Dodaj karticu</button></div>
+</form>
+</div>
+
+</div>
